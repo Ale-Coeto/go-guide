@@ -24,11 +24,17 @@ func getHello(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func getMessage(w http.ResponseWriter, r *http.Request) {
+	fmt.Printf("server: %s \n", r.Method)
+	fmt.Fprintf(w, `{"message": "hello"}`)
+}
+
 func main() {
 	// Define main mux / server and handlers
 	mux := http.NewServeMux()
 	mux.HandleFunc("/", getRoot)
 	mux.HandleFunc("/hello", getHello)
+	mux.HandleFunc("/message", getMessage)
 
 	// Run server
 	fmt.Println("Server starting on :3333")
